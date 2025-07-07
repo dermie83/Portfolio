@@ -233,8 +233,11 @@ def main():
         df = pd.read_csv(csv_file_path)
         print(f"Successfully loaded '{csv_file_path}'. Shape: {df.shape}")
 
-        df['latitude'] = df['latitude'].round(1)
-        df['longitude'] = df['longitude'].round(1)
+        df['latitude'] = df['latitude'].round()
+        df['longitude'] = df['longitude'].round()
+        df['Date_of_Loss_Year_Only'] = (df['Date_of_Loss_Year_Only'] / 50).round() * 50
+        # Convert columns to string type to ensure proper concatenation, especially for numbers
+        df['location'] = df['latitude'].astype(str)+ "," + df['longitude'].astype(str)
 
         # --- Filter rows that contain "none" in the 'Description' column ---
         if 'Description' or 'Classification' in df.columns:
@@ -275,30 +278,14 @@ def main():
                 print(f"Error: Column '{source_extract_column}' not found for specific event word extraction.")
                 print(f"Available columns: {df.columns.tolist()}")
             else:
-                new_extract_column_name = input(f"Enter the name for the new column to store the found WEATHER words (e.g., '{source_extract_column}_weather'): ")
+                new_extract_column_name = 'weather'
                 print(f"Extracting specific event words from '{source_extract_column}' and saving to '{new_extract_column_name}'...")
                 df[new_extract_column_name] = df[source_extract_column].apply(lambda x: extract_specific_event_words(x, TARGET_WEATHER_WORDS))
                 print("Specific event word extraction complete.")
         else:
             print("Skipping specific event word extraction.")
 
-        
-         # --- Specific Word Extraction Section (using TARGET_CASUALTIES_WORDS) ---
-        perform_specific_word_extraction = input(f"Do you want to extract specific CASUALTIES words (from {TARGET_CASUALTIES_WORDS}) into a new column? (yes/no): ").lower()
-        if perform_specific_word_extraction == 'yes' or perform_specific_word_extraction == 'y':
-            source_extract_column = input("Enter the exact name of the column to check for these specific CASUALTIES words (e.g., 'Description', 'Description_cleaned'): ")
-            if source_extract_column not in df.columns:
-                print(f"Error: Column '{source_extract_column}' not found for specific event word extraction.")
-                print(f"Available columns: {df.columns.tolist()}")
-            else:
-                new_extract_column_name = input(f"Enter the name for the new column to store the found CASUALTIES words (e.g., '{source_extract_column}_casualties'): ")
-                print(f"Extracting specific event words from '{source_extract_column}' and saving to '{new_extract_column_name}'...")
-                df[new_extract_column_name] = df[source_extract_column].apply(lambda x: extract_specific_event_words(x, TARGET_CASUALTIES_WORDS))
-                print("Specific event word extraction complete.")
-        else:
-            print("Skipping specific event word extraction.")
 
-        
          # --- Specific Word Extraction Section (using TARGET_COLLISION_WORDS) ---
         perform_specific_word_extraction = input(f"Do you want to extract specific COLLISION words (from {TARGET_COLLISION_WORDS}) into a new column? (yes/no): ").lower()
         if perform_specific_word_extraction == 'yes' or perform_specific_word_extraction == 'y':
@@ -307,7 +294,7 @@ def main():
                 print(f"Error: Column '{source_extract_column}' not found for specific event word extraction.")
                 print(f"Available columns: {df.columns.tolist()}")
             else:
-                new_extract_column_name = input(f"Enter the name for the new column to store the found COLLISION words (e.g., '{source_extract_column}_collisions'): ")
+                new_extract_column_name = 'collisions'
                 print(f"Extracting specific event words from '{source_extract_column}' and saving to '{new_extract_column_name}'...")
                 df[new_extract_column_name] = df[source_extract_column].apply(lambda x: extract_specific_event_words(x, TARGET_COLLISION_WORDS))
                 print("Specific event word extraction complete.")
@@ -315,17 +302,20 @@ def main():
             print("Skipping specific event word extraction.")
 
 
-        # df["DD_Lat"] = pd.to_numeric(df["DD_Lat"], errors='coerce')
-        # df["DD_Long"] = pd.to_numeric(df["DD_Long"], errors='coerce')
-
-        # zero_mask = (df["DD_Lat"] == 0)
-        # zero_mask_ = (df["DD_Lat"] == 0)
-
-        # # Replace values in 'column_to_modify' with values from 'source_column' where zero_mask is True
-        # df.loc[zero_mask, "DD_Lat"] = df.loc[zero_mask, "latitude"]
-
-        # # Replace values in 'column_to_modify' with values from 'source_column' where zero_mask is True
-        # df.loc[zero_mask_, "DD_Long"] = df.loc[zero_mask_, "longitude"]
+         # --- Specific Word Extraction Section (using TARGET_CASUALTIES_WORDS) ---
+        perform_specific_word_extraction = input(f"Do you want to extract specific CASUALTIES words (from {TARGET_CASUALTIES_WORDS}) into a new column? (yes/no): ").lower()
+        if perform_specific_word_extraction == 'yes' or perform_specific_word_extraction == 'y':
+            source_extract_column = input("Enter the exact name of the column to check for these specific CASUALTIES words (e.g., 'Description', 'Description_cleaned'): ")
+            if source_extract_column not in df.columns:
+                print(f"Error: Column '{source_extract_column}' not found for specific event word extraction.")
+                print(f"Available columns: {df.columns.tolist()}")
+            else:
+                new_extract_column_name = 'casualties'
+                print(f"Extracting specific event words from '{source_extract_column}' and saving to '{new_extract_column_name}'...")
+                df[new_extract_column_name] = df[source_extract_column].apply(lambda x: extract_specific_event_words(x, TARGET_CASUALTIES_WORDS))
+                print("Specific event word extraction complete.")
+        else:
+            print("Skipping specific event word extraction.")
 
 
         # --- Common Words Section ---
@@ -357,11 +347,14 @@ def main():
         #     print("Skipping common word analysis.")
 
 
-        df = df.drop(['DD_Lat', 'DD_Long', 'Source of Co-ordinate', 'Description', 
-                      'Record Source'], axis=1)
+        df = df.drop(['Wreck Name',	'Wreck No',
+                        'DD_Lat', 'DD_Long','latitude', 
+                        'longitude', 'Place of Loss','Date of Loss',
+                        'Source of Co-ordinate', 'Description', 
+                        'Description_cleaned', 'Record Source'], axis=1)
         
         # Define the columns to be processed
-        columns_to_transform = ['Description_cleaned_casualties', 'Description_cleaned_weather', 'Description_cleaned_collisions']
+        columns_to_transform = ['casualties', 'weather', 'collisions']
 
         # Call the function to transform the DataFrame
         df_transformed = replace_text_with_binary(df, columns_to_transform)

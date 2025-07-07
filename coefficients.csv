@@ -1,0 +1,105 @@
+,Feature,Coefficient
+0,Date_of_Loss_Year_Only,0.024708608073044758
+1,weather,1.178113545355535
+2,collisions,-0.2827814052489214
+3,Classification_Airplane,-0.259071992761542
+4,Classification_Anti-submarine Drifter,0.0
+5,Classification_Auxiliary Vessel,0.15189471456434422
+6,Classification_Barge,-1.3487490386294179
+7,Classification_Barque,-0.16368531684575036
+8,Classification_Barquentine,0.31255808318983186
+9,Classification_Boat,0.8043513307508576
+10,Classification_Brig,-0.24252952311256676
+11,Classification_Brigantine,-0.012634760648176585
+12,Classification_Canoe,0.0
+13,Classification_Cargo Ship,0.0840454589183072
+14,Classification_Carvel,-0.692497230857722
+15,Classification_Clinker,-0.8213780144317258
+16,Classification_Clipper,0.38722376461481867
+17,Classification_Coast Guard Cruiser,-0.41811106683931143
+18,Classification_Coaster,0.2775292847475432
+19,Classification_Collier,-1.1455156583223485
+20,Classification_Crane Vessel,0.0
+21,Classification_Cruiser,-0.16047220293654701
+22,Classification_Cutter,0.10461624083706125
+23,Classification_Dandy,0.7782484303175996
+24,Classification_Dredger,0.3841224509621667
+25,Classification_Dutch Galliot,0.3577969706283201
+26,Classification_East Indiaman,0.5771506983836177
+27,Classification_Fishing boat,-0.8198251687625475
+28,Classification_Fishing drifter,0.3841224509621667
+29,Classification_Flat,-0.14725858497563532
+30,Classification_Frigate,-0.27663076167141315
+31,Classification_Full-rigged ship,1.5237020119868843
+32,Classification_Gabarts,-0.48669134545689974
+33,Classification_Gabbard,-0.4965573837553421
+34,Classification_Galleon,-0.38564677391842095
+35,Classification_Galley,0.0
+36,Classification_Galliot,-0.49769546142141063
+37,Classification_Hacker,-0.21344919944065677
+38,Classification_Hobble,0.558018255942106
+39,Classification_Hooker,0.616267856526295
+40,Classification_Hulk,-0.687194799853058
+41,Classification_Iron Paddle Steam Tug,0.0
+42,Classification_Iron Steam Yacht,-0.4740899890615926
+43,Classification_Iron Steamship,0.9703551449217569
+44,Classification_Iron steam tug,0.15690685359441256
+45,Classification_Ironclad Battleship,0.3841224509621667
+46,Classification_Jigger,0.616267856526295
+47,Classification_Ketch,0.2288477486883453
+48,Classification_Lifeboat,0.6065429028889935
+49,Classification_Light Ship,-0.41811106683931143
+50,Classification_Lighter,-0.6589259322221701
+51,Classification_Liner,1.0509754621086669
+52,Classification_Lugger,0.7522919821031588
+53,Classification_Lugsail,1.1554458131019767
+54,Classification_Man O' War,-0.0863127394180705
+55,Classification_Market boat,0.6224416099160033
+56,Classification_Merchant Vessel,0.12913907374986505
+57,Classification_Motor Boat,-0.48364246351431833
+58,Classification_Motor Fishing Vessel,0.0
+59,Classification_Motor-ship,0.0
+60,Classification_Mule,-0.41811106683931143
+61,Classification_Nao,-0.5521758869547337
+62,Classification_Nobby,0.616267856526295
+63,Classification_Packet boat,0.4603750546171395
+64,Classification_Paddler Steamer,0.6503686440707747
+65,Classification_Pilot boat,-0.4084126301564491
+66,Classification_Pleasure Boat,0.36024652412920494
+67,Classification_Row boat,0.3342853516784174
+68,Classification_Sailing Boat,-0.38145865611071794
+69,Classification_Sailing Ship,-0.5329040236680613
+70,Classification_Schooner,-0.10973999122258225
+71,Classification_Scow,-0.21344919944065677
+72,Classification_Screw Steamer,-0.10793485267121988
+73,Classification_Ship,-0.38488866831306484
+74,Classification_Skiff,-0.21112590269278056
+75,Classification_Sloop,0.091837161084724
+76,Classification_Smack,-0.13458364935269593
+77,Classification_Smack Yacht,0.3841224509621667
+78,Classification_Snow,-1.2492537945694955
+79,Classification_Steam Drifter,-0.3771246195505367
+80,Classification_Steam Liner,0.0
+81,Classification_Steam Packet,0.6193586398227736
+82,Classification_Steam Trawler,-0.16241899320463551
+83,Classification_Steam Tug,-0.6122818031170865
+84,Classification_Steam Yacht,0.0
+85,Classification_Steamship,0.4742142538128827
+86,Classification_Steel Steamship,1.4366048440638777
+87,Classification_Stone hacker,-0.37147736574032897
+88,Classification_Submarine,-0.842681630236811
+89,Classification_Tanker,0.6131694515296097
+90,Classification_Tender,0.0
+91,Classification_Trader,0.27511762172443105
+92,Classification_Transport,0.6677618877117191
+93,Classification_Trawler,-0.7477512487840351
+94,Classification_Tug,0.14854356762136744
+95,Classification_Urca,-0.5230745955858888
+96,Classification_Vessel,-0.3235909589582653
+97,Classification_West Indiaman,-0.20527792222833674
+98,Classification_Whale Boat,0.0
+99,Classification_Wherry,-0.5024961717105687
+100,Classification_Wooden Steam Tug,0.0
+101,Classification_Yacht,-0.7875734294735183
+102,Classification_Yawl,0.5758097987675487
+103,Classification_Zabra,-0.38712208652375485
