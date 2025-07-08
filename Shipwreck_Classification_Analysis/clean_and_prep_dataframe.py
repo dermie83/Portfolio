@@ -4,23 +4,6 @@ import re
 from typing import Counter
 import pandas as pd # Import the regular expression module
 
-# --- Predefined list of words to check for in the 'Specific Word Extraction' section ---
-# TARGET_ALL_WORDS = ['stranded', 'struck', 'smack', 'wrecked', 'collided', 'rocks', 'cliffs', 'grounded', 'severe', 
-#                       'weather', 'extreme', 'wind','gale', 'seabed', 'ashore', 'washed', 'sink', 'sinking',
-#                       'breached', 'hit', 'sunk', 'sank', 'lost', 'disappeared' ,'storm', 'fog', 'mist' , 'heavy', 'force',
-#                        'shallow', 'tide', 'snow', 'broke', 'broken', 'conditions', 'condition', 'violent', 'keeled', 'rogue', 
-#                        'filled','full', 'water', 'rudder', 'control', 'sandbank', 'pierced', 'wreck', 'missing', 
-#                        'ran', 'running', 'aground','distress', 'squall', 'upturned', 'capsized', 'collision',
-#                       'wreckage', 'found', 'discovered', 'burnt', 'fire', 'shot', 'sunken', 'mast', 'dismasted', 'derelict',
-#                       'destroyed', 'destruction', 'burned', 'burning', 'abandoned', 'drowned', 'loss', 'foundered', 
-#                       'located', 'lowwater', 'strong', 'tides', 'currents', 'river', 'parted', 'driven', 
-#                       'explosion', 'blew up', 'hurricane', 'sloops', 'anchored', 'torpedoed', 'uboat', 
-#                       'drifting','reef', 'wrecks', 'broken', 'pieces', 'floating', 'waterlogged',
-#                       'bottom', 'upwards', 'logboat', 'shore', 'perished','en', 'route','went', 'going', 'down',
-#                       'all', 'rescued', 'saved', 'no', 'crew', 'died', 'stricken', 'explosive', 'bodies', 'survived',
-#                       'alive', 'life', 'stormy', 'dead', 
-#                       'one', 'two','three', 'four', 'five', 'six', 'seven','eight', 'nine', 'ten', 'eleven', 'twelve',
-#                       'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty']
 
 TARGET_COLLISION_WORDS = ['struck', 'smack', 'collided', 'rocks', 'cliffs', 'grounded', 'seabed', 'ashore',
                         'sink', 'sunk', 'sank', 'sinking', 'breached', 'hit', 'shallow', 'forced',
@@ -116,50 +99,6 @@ def extract_specific_event_words(text, target_words_list):
         return ' '.join(unique_found_words_ordered)
     
 
-# --- Helper Function for Finding Most Common Words (kept for potential future use) ---
-# def get_most_common_words(df, source_column_name, top_n=10):
-#     """
-#     Finds the most common words in a specified column across all rows.
-
-#     Args:
-#         df (pd.DataFrame): The input DataFrame.
-#         source_column_name (str): The name of the column containing text data.
-#         top_n (int): The number of most common words to retrieve.
-
-#     Returns:
-#         pd.DataFrame: A new DataFrame with 'Word' and 'Count' columns for the most common words,
-#                       or None if the column is not found or empty.
-#     """
-#     if source_column_name not in df.columns:
-#         print(f"Error: Source column '{source_column_name}' not found for common word analysis.")
-#         return None
-
-#     # Concatenate all text from the column into a single string
-#     # Ensure to handle non-string types by converting to string and dropping NaNs
-#     all_text = ' '.join(df[source_column_name].dropna().astype(str))
-
-#     # Split the combined text into words
-#     words = re.findall(r'\b[a-z0-9]+\b', all_text.lower())
-
-#     if not words:
-#         print(f"No words found in column '{source_column_name}' for common word analysis.")
-#         return None
-
-#     # Count word frequencies
-#     word_counts = Counter(words)
-
-#     # Get the top N most common words
-#     most_common = word_counts.most_common(top_n)
-
-#     # Create a new DataFrame from the most common words
-#     if most_common:
-#         common_words_df = pd.DataFrame(most_common, columns=['Word', 'Count'])
-#         print(f"Found top {len(common_words_df)} most common words from column '{source_column_name}'.")
-#         return common_words_df
-#     else:
-#         print(f"Could not find any common words in column '{source_column_name}'.")
-#         return None
-
 def replace_text_with_binary(df: pd.DataFrame, columns_to_process: list) -> pd.DataFrame:
     """
     Replaces text in specified DataFrame columns with binary values (1 or 0).
@@ -226,7 +165,7 @@ def transform_cell(cell_value, keywords_for_zero_lower) -> int:
 def main():
     print("--- Google Geocoding, Text Cleaning, and Concatenation Script ---")
 
-    csv_file_path = r'Wrecks20240620_table_geocoded.csv'
+    csv_file_path = r'Shipwreck_Classification_Analysis\Wrecks20240620_table_geocoded.csv'
 
     try:
         # Load the CSV file
@@ -316,35 +255,6 @@ def main():
                 print("Specific event word extraction complete.")
         else:
             print("Skipping specific event word extraction.")
-
-
-        # --- Common Words Section ---
-        # perform_common_words = input("Do you want to find the most common words in a column? (yes/no): ").lower()
-        # if perform_common_words == 'yes' or perform_common_words == 'y':
-        #     common_words_source_column = input("Enter the exact name of the column for common word analysis (e.g., 'Description', 'Cleaned_Text', 'Concatenated_Text'): ")
-        #     if common_words_source_column not in df.columns:
-        #         print(f"Error: Column '{common_words_source_column}' not found for common word analysis.")
-        #         print(f"Available columns: {df.columns.tolist()}")
-        #     else:
-        #         try:
-        #             top_n_str = input("Enter the number of most common words to find (e.g., 10): ")
-        #             top_n = int(top_n_str)
-        #             if top_n <= 0:
-        #                 print("Number of common words must be a positive integer. Using default (10).")
-        #                 top_n = 10
-        #         except ValueError:
-        #             print("Invalid input for number of common words. Using default (10).")
-        #             top_n = 10
-
-        #         common_words_df = get_most_common_words(df, common_words_source_column, top_n)
-        #         if common_words_df is not None:
-        #             common_words_output_path = os.path.splitext(csv_file_path)[0] + "_common_words.csv"
-        #             common_words_df.to_csv(common_words_output_path, index=False)
-        #             print(f"Most common words saved to '{common_words_output_path}'")
-        #         else:
-        #             print("No common words DataFrame was generated.")
-        # else:
-        #     print("Skipping common word analysis.")
 
 
         df = df.drop(['Wreck Name',	'Wreck No',
